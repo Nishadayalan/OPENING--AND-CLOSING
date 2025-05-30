@@ -25,53 +25,89 @@ Use Closing Operation.
 DEVELOPED BY: NISHA D
 REGISTER NO: 212223230143
 ```
-# Import the necessary packages
+## OPENING:
 ```
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+%matplotlib inline
+
+def load_img():
+    blank_img =np.zeros((600,600))
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    cv2.putText(blank_img,text='NISHA',org=(50,300), fontFace=font,fontScale= 5,color=(255,255,255),thickness=25,lineType=cv2.LINE_AA)
+    return blank_img
+
+def display_img(img):
+    fig = plt.figure(figsize=(12,10))
+    ax = fig.add_subplot(111)
+    ax.imshow(img,cmap='gray')
+    plt.show()
+
+img = load_img()
+
+display_img(img)
+
+white_noise = np.random.randint(low=0,high=2,size=(600,600))
+
+white_noise
+
+noise_img = white_noise+img
+
+display_img(noise_img)
+
+kernel = np.ones((5,5),np.uint8)
+opening = cv2.morphologyEx(noise_img, cv2.MORPH_OPEN, kernel)
+
+display_img(opening)
 ```
-# Create the Text using cv2.putText
+
+## CLOSING:
+
 ```
-img = np.zeros((100, 550), dtype = 'uint8')
-font = cv2.FONT_ITALIC
-cv2.putText(img, 'NISHA', (5,70), font, 2, (255), 5, cv2.LINE_AA)
-n_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-plt.imshow(n_img)
-plt.axis("off")
-```
-# Create the structuring element
-```
-kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (11,11))
-```
-# Use Opening operation
-```
-image_open = cv2.morphologyEx(n_img, cv2.MORPH_OPEN, kernel)
-plt.imshow(image_open)
-plt.axis("off")
-```
-# Use Closing Operation
-```
-image_close = cv2.morphologyEx(n_img, cv2.MORPH_CLOSE, kernel)
-plt.imshow(image_close)
-plt.axis("off")
-```
+img = load_img()
+
+black_noise = np.random.randint(low=0,high=2,size=(600,600))
+
+black_noise
+
+black_noise= black_noise * -255
+
+black_noise_img = img + black_noise
+
+black_noise_img
+
+black_noise_img[black_noise_img==-255] = 0
+
+closing = cv2.morphologyEx(black_noise_img, cv2.MORPH_CLOSE, kernel)
+
+
+display_img(closing)
 ## Output:
+
+![image](https://github.com/user-attachments/assets/4638ed9b-e5f9-4729-99bc-02d3d5f8dbb6)
+
 
 ### Display the input Image
 
-![image](https://github.com/user-attachments/assets/399fa1b3-087d-4632-b8b9-e36728b30c1f)
 
 
 ### Display the result of Opening
 
-![image](https://github.com/user-attachments/assets/6e6f6ae2-7927-4eab-b52d-0773f1b5958b)
+![image](https://github.com/user-attachments/assets/949bac72-aa2b-44b9-84b0-e962b413ed4b)
+
+
+![image](https://github.com/user-attachments/assets/bcb74c43-113a-4ed0-94b8-e6fd9d32cb21)
+
 
 
 ### Display the result of Closing
 
+![image](https://github.com/user-attachments/assets/94f664aa-d1a8-46fd-8179-a9ec252b1a1a)
 
-![image](https://github.com/user-attachments/assets/f548b1f1-5e83-44d7-ab2b-35d0dc40e9de)
+
+
+![image](https://github.com/user-attachments/assets/943aa9fb-bbae-48a9-be8e-7bc2f3fd4b0d)
 
 ## Result
 Thus the Opening and Closing operation is used in the image using python and OpenCV.
