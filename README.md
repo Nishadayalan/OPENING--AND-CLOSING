@@ -83,13 +83,10 @@ closing = cv2.morphologyEx(black_noise_img, cv2.MORPH_CLOSE, kernel)
 
 
 display_img(closing)
+```
 ## Output:
 
 ![image](https://github.com/user-attachments/assets/4638ed9b-e5f9-4729-99bc-02d3d5f8dbb6)
-
-
-### Display the input Image
-
 
 
 ### Display the result of Opening
